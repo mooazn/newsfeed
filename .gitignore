@@ -1,0 +1,19 @@
+# Python virtual env
+.venv/
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# SQLite DB
+news.db
+
+# Output + archive files
+out/
+blocked_feeds.json
+
+# Other misc
+*.log
+
+.idea/

@@ -1,0 +1,42 @@
+# When to run and how many items per topic
+run_time: "07:30 America/Los_Angeles"
+per_topic: 3
+
+# Optional keyword hints per topic (boost rank if title contains any)
+topic_keywords:
+  World: ["UN", "NATO", "conflict", "election", "treaty"]
+  US: ["Congress", "White House", "Supreme Court", "state"]
+  Business: ["earnings", "merger", "IPO", "inflation"]
+  Tech: ["AI", "chip", "privacy", "security"]
+  Science: ["study", "research", "NASA", "trial"]
+
+# Per-source weights (small edge to wire services)
+source_weights:
+  Reuters: 0.25
+  AP: 0.2
+  Associated Press: 0.2
+  BBC News: 0.1
+
+topics:
+  World:
+    feeds:
+      - https://feeds.bbci.co.uk/news/world/rss.xml
+      - https://www.reutersagency.com/feed/?best-topics=world&post_type=best
+  US:
+    feeds:
+      - https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml
+      - https://www.npr.org/rss/rss.php?id=1001
+  Business:
+    feeds:
+      - https://www.cnbc.com/id/10001147/device/rss/rss.html
+      - https://finance.yahoo.com/news/rssindex
+      - https://www.marketwatch.com/marketwatch-rss
+  Tech:
+    feeds:
+      - https://feeds.arstechnica.com/arstechnica/index
+      - https://feeds.feedburner.com/venturebeat/SZYF
+      - https://www.techradar.com/rss/techradar-pro
+  Science:
+    feeds:
+      - https://www.sciencedaily.com/rss/top/science.xml
+      - https://www.nature.com/subjects/science/rss
