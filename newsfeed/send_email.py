@@ -11,24 +11,21 @@ def send_via_gmail(html: str, subject: str, mail_from: str, mail_to: str):
     smtp_user = os.getenv("SMTP_USER")
     smtp_pass = os.getenv("SMTP_PASS")
 
-    if not smtp_user or not smtp_pass:
-        logger.error("SMTP credentials missing: SMTP_USER / SMTP_PASS not set.")
-        return
+    # Split comma-separated list
+    recipients = [x.strip() for x in mail_to.split(",") if x.strip()]
 
     msg = MIMEText(html, "html")
     msg["Subject"] = subject
     msg["From"] = mail_from
-    msg["To"] = mail_to
+    msg["To"] = ", ".join(recipients)   # Proper header formatting
 
     try:
         with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as server:
             server.starttls()
-
-            logger.info("Connecting to Gmail SMTP...")
             server.login(smtp_user, smtp_pass)
 
-            server.send_message(msg)
-            logger.info(f"Email sent successfully to {mail_to}")
+            server.sendmail(mail_from, recipients, msg.as_string())
+            logger.info(f"Email sent successfully to: {recipients}")
 
     except smtplib.SMTPAuthenticationError:
         logger.error("SMTP authentication failed — check SMTP_USER/SMTP_PASS.")
